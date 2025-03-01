@@ -29,6 +29,6 @@ export const createTodoHtml = (todo) => {
   liElement.innerHTML = html;//agregamos el html al elemento li
   liElement.setAttribute('data-id', todo.id);//agregamos el atributo data-id al elemento li
   if(todo.done)
-    liElement.setAttribute('data-completed');//agregamos el atributo data-completed al elemento li
+    liElement.classList.add('data-completed');//agregamos el atributo data-completed al elemento li
   return liElement;//retornamos el elemento li
 }
