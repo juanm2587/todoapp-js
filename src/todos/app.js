@@ -1,6 +1,6 @@
 import html from './app.html?raw';//importamos el archivo html y lo guardamos en la variable html. Usamanos el modificador ?raw para que el archivo html se importe como texto plano
 import todoStore, { Filters } from '../store/todo.store';//importamos el store de los todos
-import { renderTodos } from './use-cases';
+import { renderTodos,renderPending } from './use-cases';
 import { Todo } from './models/todo.model';
 
 //------------------Referencias a clases css------------------
@@ -8,7 +8,8 @@ const ElementIDs = {
   ClearCompletedButton:'.clear-completed',//apunta al boton de borrar todos los todos completados
   TodoList: '.todo-list',//apunta al identificar donde quiero insertar los todos
   NewTodoInput: '#new-todo-input',//apunta al input donde se ingresan los nuevos todos
-  TodoFilters:'.filtro',//apunta al filtro de los todos
+  TodoFilters: '.filtro',//apunta al filtro de los todos
+  PendingCountLabel:'#pending-count',//apunta a la cantidad de todos pendientes
 }
 
 
@@ -21,10 +22,14 @@ const ElementIDs = {
 export const App = (elementId) => {
   //renderizar componente
   const displayTodos = () => {
-    const todos = todoStore.getTodos(todoStore.getCurrentFilter());
+    const todos = todoStore.getTodos(todoStore.getCurrentFilter());//estado actual de los todos
     //console.log(todos);//llamo a los todos por consola
     renderTodos(ElementIDs.TodoList, todos); //aca pongo donde tengo que renderizar
+    updatePendingCount();
   };
+  const updatePendingCount = () => { //actualiza la cantidad de todos pendientes
+    renderPending(ElementIDs.PendingCountLabel);//renderiza la cantidad de todos pendientes
+  }
 
   //Cuando la funcion App() se llama.
   //Esta es la funcion sincrona que crea el elemento en el html y esto aparece en el DOM
@@ -93,5 +98,4 @@ export const App = (elementId) => {
       displayTodos();
     });
   });
-
 }
