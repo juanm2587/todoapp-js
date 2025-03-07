@@ -25,7 +25,7 @@ export const App = (elementId) => {
     const todos = todoStore.getTodos(todoStore.getCurrentFilter());//estado actual de los todos
     //console.log(todos);//llamo a los todos por consola
     renderTodos(ElementIDs.TodoList, todos); //aca pongo donde tengo que renderizar
-    updatePendingCount();
+    updatePendingCount();//llamamos a la funcion que actualiza la cantidad de todos pendientes
   };
   const updatePendingCount = () => { //actualiza la cantidad de todos pendientes
     renderPending(ElementIDs.PendingCountLabel);//renderiza la cantidad de todos pendientes
